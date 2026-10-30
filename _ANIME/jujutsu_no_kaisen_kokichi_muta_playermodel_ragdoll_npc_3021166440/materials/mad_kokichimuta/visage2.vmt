@@ -1,7 +1,0 @@
-"VertexlitGeneric"
-{
-	"$basetexture" "mad_KokichiMuta/Visage2"
-	"$nocull" 1
-	"$nodecal" 1
-	"$translucent" 1
-}

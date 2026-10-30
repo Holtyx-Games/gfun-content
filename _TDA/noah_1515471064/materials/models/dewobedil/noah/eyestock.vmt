@@ -1,8 +1,0 @@
-"VertexlitGeneric"
-{
-	"$basetexture" "models/dewobedil/noah/head"
-	"$nodecal" 1
-
-	"$phong" "1"
-	"$lightwarptexture" "models/dewobedil/noah/toon_head"
-}

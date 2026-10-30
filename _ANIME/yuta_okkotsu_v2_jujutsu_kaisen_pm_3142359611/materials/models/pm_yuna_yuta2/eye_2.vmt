@@ -1,7 +1,0 @@
-"VertexlitGeneric"
-{
-	"$basetexture" "models/pm_yuna_yuta2/eye_2"
-	$nocull 1
-	$halflambert 1
-	$lightwarptexture "models/pm_yuna_yuta2/toon_n"
-}

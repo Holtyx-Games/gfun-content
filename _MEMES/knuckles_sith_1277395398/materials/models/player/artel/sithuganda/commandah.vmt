@@ -1,6 +1,0 @@
-"VertexLitGeneric"
-{
-	"$baseTexture" "models\player\artel\sithuganda\commandah"
-	"$halflambert" "1"
-	$nocull 1
-}

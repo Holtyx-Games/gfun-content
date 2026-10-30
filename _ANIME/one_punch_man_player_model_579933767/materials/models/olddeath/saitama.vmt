@@ -1,7 +1,0 @@
-VertexLitGeneric
-{
-	$basetexture models\olddeath\saitama
-	"$envmap" "env_cubemap"
-	$envmapmask models\olddeath\saitama_spec
-	"$surfaceprop" "Flesh"
-}
