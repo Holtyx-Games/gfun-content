@@ -1,0 +1,142 @@
+name: Publish to Steam Workshop
+
+# For every top-level folder changed since its last successful upload:
+#   1. rebuild <folder>/_REPACK from its subfolders (see .github/workshop/addons.json)
+#   2. compress textures with GmodAddonCompressor (GAC)
+#   3. pack a .gma and upload it to the folder's workshop item with steamcmd
+#
+# Required secrets: STEAM_USERNAME, STEAM_PASSWORD
+# Optional secrets: STEAM_SHARED_SECRET (Steam Guard mobile authenticator shared_secret, base64)
+#                   STEAM_CONFIG_VDF    (base64 of steamcmd's config/config.vdf from an authorised login)
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/**'
+      - '*.bat'
+      - '*.md'
+  workflow_dispatch:
+    inputs:
+      folders:
+        description: 'Folders to publish regardless of changes: comma-separated (e.g. "_ANIME,_SWEP") or "all"'
+        required: true
+
+concurrency:
+  group: workshop-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # moves the workshop/<folder> tags after each upload
+
+env:
+  # GmodAddonCompressor commit to build. Bump to pick up upstream changes.
+  GAC_COMMIT: 1893c798fe804579d0fae06f10434f24d45fb4e0
+  # GAC settings, same as the GUI controls. Defaults match the GUI defaults:
+  # halve textures above 1024px and re-encode VTFs as DXT1/DXT5.
+  GAC_ARGS: --types vtf,png,jpg --resolution 2 --target-width 1024 --target-height 1024
+  PYTHONUTF8: '1'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    timeout-minutes: 360
+    steps:
+      - name: Enable long paths
+        run: git config --global core.longpaths true
+
+      # Full history (for the per-folder tags) but no file contents yet: blobs are only
+      # downloaded for the folders we actually publish.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout: .github
+
+      - name: Detect changed folders
+        id: detect
+        env:
+          BEFORE: ${{ github.event.before }}
+          FORCE: ${{ inputs.folders }}
+        run: python -I .github/workshop/workshop.py changed --before "$BEFORE" --force "$FORCE"
+
+      - name: Check out changed folders
+        if: steps.detect.outputs.any == 'true'
+        env:
+          FOLDERS: ${{ steps.detect.outputs.folders }}
+        run: |
+          mapfile -t folders < <(python -I -c 'import json,os; print("\n".join(json.loads(os.environ["FOLDERS"])))' | tr -d '\r')
+          git sparse-checkout add "${folders[@]}"
+
+      - name: Cache GAC build
+        if: steps.detect.outputs.any == 'true'
+        id: gac-cache
+        uses: actions/cache@v4
+        with:
+          path: .github/workshop/gac-cli/out
+          key: gac-${{ env.GAC_COMMIT }}-${{ hashFiles('.github/workshop/gac-cli/*.cs', '.github/workshop/gac-cli/*.csproj') }}
+
+      - uses: actions/setup-dotnet@v4
+        if: steps.detect.outputs.any == 'true'
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build GAC
+        if: steps.detect.outputs.any == 'true' && steps.gac-cache.outputs.cache-hit != 'true'
+        working-directory: .github/workshop/gac-cli
+        run: |
+          git init -q gac-src
+          git -C gac-src fetch -q --depth 1 https://github.com/Shark-vil/GmodAddonCompressor "$GAC_COMMIT"
+          git -C gac-src checkout -q FETCH_HEAD
+          dotnet publish -c Release -r win-x64 --self-contained false -o out
+
+      - name: Install steamcmd
+        if: steps.detect.outputs.any == 'true'
+        env:
+          STEAM_CONFIG_VDF: ${{ secrets.STEAM_CONFIG_VDF }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/steamcmd"
+          cd "$RUNNER_TEMP/steamcmd"
+          curl -sSfL -o steamcmd.zip https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+          unzip -q steamcmd.zip
+          ./steamcmd.exe +quit || true   # first run self-updates and exits non-zero
+          if [ -n "$STEAM_CONFIG_VDF" ]; then
+            mkdir -p config
+            echo "$STEAM_CONFIG_VDF" | base64 -d > config/config.vdf
+          fi
+
+      - name: Repack, compress and publish
+        if: steps.detect.outputs.any == 'true'
+        env:
+          FOLDERS: ${{ steps.detect.outputs.folders }}
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
+          STEAM_SHARED_SECRET: ${{ secrets.STEAM_SHARED_SECRET }}
+          STEAM_CACHED_LOGIN: ${{ secrets.STEAM_CONFIG_VDF != '' }}
+        run: |
+          mapfile -t folders < <(python -I -c 'import json,os; print("\n".join(json.loads(os.environ["FOLDERS"])))' | tr -d '\r')
+          failed=()
+          for folder in "${folders[@]}"; do
+            echo "::group::$folder"
+            gma="$RUNNER_TEMP/gma/$folder/$folder.gma"
+            if python -I .github/workshop/workshop.py stage "$folder" \
+              && .github/workshop/gac-cli/out/gac-cli.exe "$folder/_REPACK" $GAC_ARGS \
+              && python -I .github/workshop/workshop.py gma "$folder" "$gma" \
+              && python -I .github/workshop/workshop.py publish "$RUNNER_TEMP/steamcmd/steamcmd.exe" "$folder" "$gma" \
+              && git tag -f "workshop/$folder" HEAD \
+              && git push -f origin "refs/tags/workshop/$folder"
+            then
+              echo "$folder published" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::error::$folder failed"
+              echo "$folder **FAILED**" >> "$GITHUB_STEP_SUMMARY"
+              failed+=("$folder")
+            fi
+            rm -rf "$RUNNER_TEMP/gma/$folder"
+            echo "::endgroup::"
+          done
+          [ ${#failed[@]} -eq 0 ] || { echo "Failed: ${failed[*]}"; exit 1; }

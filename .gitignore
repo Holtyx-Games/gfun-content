@@ -1,0 +1,5 @@
+# Workshop CI build outputs
+.github/workshop/gac-cli/gac-src/
+.github/workshop/gac-cli/bin/
+.github/workshop/gac-cli/obj/
+.github/workshop/gac-cli/out/

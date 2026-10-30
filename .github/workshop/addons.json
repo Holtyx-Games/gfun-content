@@ -1,0 +1,26 @@
+{
+  "$comment": [
+    "One entry per top-level folder. A folder with an empty workshop_id is never uploaded.",
+    "mode: merge  = every subfolder is merged into <folder>/_REPACK (what recursive_copy.bat did)",
+    "      repack = <folder>/_REPACK is edited by hand and uploaded as-is",
+    "      folder = the folder itself is the addon",
+    "Optional: title, type, tags, ignore (gmad-style patterns) for the .gma metadata."
+  ],
+  "addons": {
+    "_ANIME":         { "workshop_id": "3661232506", "mode": "merge" },
+    "_ANIME2":        { "workshop_id": "3661240591", "mode": "merge" },
+    "_ANIME_WAIFUS":  { "workshop_id": "3661230766", "mode": "merge" },
+    "_BP":            { "workshop_id": "3661239865", "mode": "merge" },
+    "_GAMES":         { "workshop_id": "3661231828", "mode": "merge" },
+    "_GAMES_WAIFUS":  { "workshop_id": "3661229296", "mode": "merge" },
+    "_GENSHIN":       { "workshop_id": "3661230265", "mode": "merge" },
+    "_KILLERS":       { "workshop_id": "3661233360", "mode": "merge" },
+    "_MEMES":         { "workshop_id": "3661233894", "mode": "merge" },
+    "_SEASONAL":      { "workshop_id": "3661235558", "mode": "merge" },
+    "_SWEP":          { "workshop_id": "3661226842", "mode": "repack", "type": "weapon" },
+    "_TDA":           { "workshop_id": "3661236188", "mode": "merge" },
+    "_TDA2":          { "workshop_id": "3661237483", "mode": "merge" },
+    "_TOUHOU":        { "workshop_id": "3661228681", "mode": "merge" },
+    "KNIVES":         { "workshop_id": "3661238406", "mode": "folder", "type": "weapon" }
+  }
+}

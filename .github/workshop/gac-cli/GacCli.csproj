@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Headless build of GmodAddonCompressor (GAC): https://github.com/Shark-vil/GmodAddonCompressor
+    GAC ships only as a WPF GUI, so this project compiles GAC's own compressor classes
+    (VTFEdit, PNGEdit, ...) from its source and drives them from Program.cs.
+    The workflow clones GAC at a pinned commit into $(GacSrc) before building.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>GmodAddonCompressor</RootNamespace>
+    <AssemblyName>gac-cli</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <NoWarn>$(NoWarn);CS1998;CS8600;CS8602;CS8604;CS0168;CA1416</NoWarn>
+    <GacSrc Condition="'$(GacSrc)' == ''">$(MSBuildThisFileDirectory)gac-src\GmodAddonCompressor\</GacSrc>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="$(GacSrc)**\*.cs"
+             Exclude="$(GacSrc)App.xaml.cs;$(GacSrc)AssemblyInfo.cs;$(GacSrc)MainWindow.xaml.cs;$(GacSrc)obj\**;$(GacSrc)bin\**" />
+    <EmbeddedResource Include="$(GacSrc)Properties\Resources.resx"
+                      Link="Properties\Resources.resx"
+                      ManifestResourceName="GmodAddonCompressor.Properties.Resources" />
+  </ItemGroup>
+
+  <!-- Same package set as GmodAddonCompressor.csproj (minus the WPF-only dialog package). -->
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="NAudio" Version="2.1.0" />
+    <PackageReference Include="NAudio.Vorbis" Version="1.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NLua" Version="1.6.0" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>
