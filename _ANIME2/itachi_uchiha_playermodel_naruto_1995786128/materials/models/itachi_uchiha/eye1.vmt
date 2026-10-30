@@ -1,9 +1,0 @@
-"VertexlitGeneric"
-{
-	"$basetexture" "models/itachi_uchiha/eye1"
-                "$bumpamap"  "models/itachi_uchiha/eye1"
-                                   "$alphatest" "1"
-
-                                   "$halflambert" "1"
-
-}

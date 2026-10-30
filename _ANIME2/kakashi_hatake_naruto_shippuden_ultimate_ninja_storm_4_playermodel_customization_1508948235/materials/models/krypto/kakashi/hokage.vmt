@@ -1,7 +1,0 @@
-"VertexlitGeneric"
-{
-	"$basetexture" "models/krypto/kakashi/Hokage"
-	"$model" 1
-	"$nodecal" 1
-	"$lightwarptexture" "models/krypto/kakashi/toon"
-}

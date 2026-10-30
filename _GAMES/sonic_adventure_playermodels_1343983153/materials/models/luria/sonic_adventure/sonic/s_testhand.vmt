@@ -1,7 +1,0 @@
-"VertexlitGeneric"
-{
-	"$basetexture" "models\Luria\Sonic_Adventure\Sonic\s_testhand"
-	"$bumpmap" "models\Luria\Sonic_Adventure\Sonic\Bump"
-
- 	"$phong" "1"
-}
