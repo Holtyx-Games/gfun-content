@@ -1,0 +1,6 @@
+{
+    "title": "Holtyx UI",
+    "type": "ServerContent",
+    "tags": ["fun", "build"],
+    "ignore": ["*.md"]
+}
