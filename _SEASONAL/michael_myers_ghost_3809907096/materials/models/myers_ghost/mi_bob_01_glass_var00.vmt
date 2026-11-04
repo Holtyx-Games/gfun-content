@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models/myers_ghost/mi_bob_01_glass_var00"
+ "$model" "1"
+ "$nocull" "1"
+ "$translucent" "1"
+ "$phong" "1"
+ "$phongexponent" "12"
+ "$phongboost" "0.12"
+ "$phongfresnelranges" "[0.05 0.2 0.5]"
+}

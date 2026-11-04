@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/yates/clownmask"
+	"$bumpmap" "models/yates/clownmask_n"
+}

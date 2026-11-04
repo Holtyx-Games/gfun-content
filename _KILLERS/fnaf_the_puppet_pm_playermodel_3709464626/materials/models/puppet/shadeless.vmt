@@ -1,0 +1,10 @@
+VertexLitGeneric
+{
+	$model	"1"
+	$nocull	"0"
+
+	$basetexture	"models/puppet/Black.vtf"
+	$surfaceprop	"plastic"
+	
+	$phong	"0"
+}

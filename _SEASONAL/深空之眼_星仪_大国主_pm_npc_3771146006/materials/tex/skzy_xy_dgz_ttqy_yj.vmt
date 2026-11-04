@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "tex/skzy_xy_dgz_ttqy_yj"
+	$bumpmap "dev/dev_normal"
+	$lightwarptexture "tex/warp_face"
+	$phong 1
+	$phongboost .02
+	$phongfresnelranges 1 .1 .1
+	"$halflambert" 1
+	"$nocull" 1
+	"$nodecal" 1
+	$selfillum 1
+}

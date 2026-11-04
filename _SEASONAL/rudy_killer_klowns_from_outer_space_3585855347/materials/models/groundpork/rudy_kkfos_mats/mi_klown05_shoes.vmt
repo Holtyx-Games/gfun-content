@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\groundpork\rudy_kkfos_mats\rudyshoes_d"
+	"$bumpmap" "models\groundpork\rudy_kkfos_mats\rudyshoes_n"
+	"$model" 1
+}

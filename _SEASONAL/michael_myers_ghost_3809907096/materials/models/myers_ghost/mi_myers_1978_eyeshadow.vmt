@@ -1,0 +1,12 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models/myers_ghost/mi_myers_1978_eyeshadow"
+ "$model" "1"
+ "$nocull" "1"
+ "$alphatest" "1"
+ "$alphatestreference" "0.33"
+ "$phong" "1"
+ "$phongexponent" "12"
+ "$phongboost" "0.12"
+ "$phongfresnelranges" "[0.05 0.2 0.5]"
+}

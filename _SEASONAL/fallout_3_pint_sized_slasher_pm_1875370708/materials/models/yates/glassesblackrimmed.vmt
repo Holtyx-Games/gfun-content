@@ -1,0 +1,7 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/yates/glassesblackrimmed"
+	"$bumpmap" "models/yates/glassesblackrimmed_n"
+	"$envmapmask" "models/yates/glassesblackrimmed_em"
+	"$alphatest" 1
+}

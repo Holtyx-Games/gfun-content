@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/yates/prewarboysoutfitnew"
+	"$bumpmap" "models/yates/prewarboysoutfitnew_n"
+}

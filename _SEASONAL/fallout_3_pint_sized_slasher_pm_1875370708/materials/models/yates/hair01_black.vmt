@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/yates/hair01_black"
+	"$bumpmap" 	"models/yates/hair01_n"
+	"$alphatest"	"1"
+	"$allowalphatocoverage"	"1"	
+	
+	"$rimlight" "1"
+	"$rimlightexponent" "5"
+	"$rimlightboost" "0.3"		
+}

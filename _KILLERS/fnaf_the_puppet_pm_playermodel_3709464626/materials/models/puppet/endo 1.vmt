@@ -1,0 +1,22 @@
+VertexLitGeneric
+{
+	$model	"1"
+	$nocull	"0"
+
+	$basetexture	"models/puppet/Endo 1.vtf"
+	$bumpmap	"models/puppet/Bump.vtf"
+	$surfaceprop	"plastic"
+	
+	$envmap	"env_cubemap"
+	$normalmapalphaenvmapmask "1"
+	$envmapfresnel "0.34"
+	$envmaplightscale "1"
+	$envmapscaleminmax "[0 1]"
+	$envmapanistropy "1"
+	$envmapanistropyscale "0.05"
+	
+	$phong	"1"
+	$phongexponent	"7"
+	$phongboost	"12"
+	$phongfresnelranges	"[0.05 0.25 1]"
+}

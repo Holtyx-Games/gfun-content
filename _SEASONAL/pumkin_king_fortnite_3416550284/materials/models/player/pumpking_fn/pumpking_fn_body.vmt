@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/player/pumpking_fn/pumpking_fn_body"
+	"$bumpmap" "models/player/pumpking_fn/pumpking_fn_body_normal"
+}

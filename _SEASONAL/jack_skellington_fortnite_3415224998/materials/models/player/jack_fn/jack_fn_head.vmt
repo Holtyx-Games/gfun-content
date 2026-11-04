@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/player/jack_fn/jack_fn_head"
+	"$bumpmap" "models/player/jack_fn/jack_fn_head_normal"
+}

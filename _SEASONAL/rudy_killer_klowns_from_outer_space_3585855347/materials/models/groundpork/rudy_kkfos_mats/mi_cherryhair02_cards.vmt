@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models\groundpork\rudy_kkfos_mats\rudyhair_d"
+	"$translucent" 1
+	"$model" 1
+}

@@ -1,0 +1,14 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/player/pumpking_fn/pumpking_fn_head_glow"
+	"$bumpmap" "models/player/pumpking_fn/pumpking_fn_head_normal"
+
+	"$alphatest" 1
+	"$phong" "1"
+	"$phongexponent" "0"
+	"$phongboost" "0"
+
+	"$halflambert" 1
+	"$selfillummask" "models/player/pumpking_fn/pumpking_fn_head_glow_fx"
+	"$selfillum" "1" 
+}

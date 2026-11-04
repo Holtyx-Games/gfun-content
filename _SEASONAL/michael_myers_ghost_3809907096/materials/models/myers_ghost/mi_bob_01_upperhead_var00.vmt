@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+ "$basetexture" "models/myers_ghost/mi_bob_01_upperhead_var00"
+ "$model" "1"
+ "$nocull" "1"
+ "$bumpmap" "models/myers_ghost/mi_bob_01_upperhead_var00_normal"
+ "$phong" "1"
+ "$phongexponent" "12"
+ "$phongboost" "0.12"
+ "$phongfresnelranges" "[0.05 0.2 0.5]"
+}

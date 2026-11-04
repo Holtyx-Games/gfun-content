@@ -1,0 +1,16 @@
+VertexLitGeneric
+{
+	$model	"1"
+	$nocull	"0"
+
+	$basetexture			"models/puppet/Black.vtf"	
+	$phongexponenttexture	"models/puppet/Specular Black.vtf"
+	$bumpmap				"models/puppet/Bump Flat.vtf"
+	$surfaceprop			"plastic"
+	
+	$phong				"1"
+	$phongexponent		"10"
+	$phongboost			"15"
+	$phongfresnelranges	"[0.05 0.05 1]"
+	$phongalbedotint	"1"
+}

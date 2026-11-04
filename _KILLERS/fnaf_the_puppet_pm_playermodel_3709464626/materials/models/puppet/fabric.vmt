@@ -1,0 +1,14 @@
+VertexLitGeneric
+{
+	$model	"1"
+	$nocull	"0"
+
+	$basetexture	"models/puppet/Fabric.vtf"
+	$bumpmap	"models/puppet/Fabric Bump.vtf"
+	$surfaceprop	"plastic"
+	
+	$phong	"1"
+	$phongexponent	"1"
+	$phongboost	".1"
+	$phongfresnelranges	"[0.05 0.5 1]"
+}

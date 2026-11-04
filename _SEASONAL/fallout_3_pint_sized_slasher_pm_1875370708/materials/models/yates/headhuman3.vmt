@@ -1,0 +1,6 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/yates/headhuman3"
+	"$bumpmap" "models/yates/headhuman_n"
+}
+

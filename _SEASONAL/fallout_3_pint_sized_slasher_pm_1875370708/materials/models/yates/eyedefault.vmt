@@ -1,0 +1,12 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/yates/eyedefault"
+
+	"$phong"			"1"
+	"$phongboost"		".05"
+	"$phongexponent"		"50"
+	"$phongfresnelranges"	"[.8 .8 .6]"
+
+	"$halflambert" "1"
+			
+}

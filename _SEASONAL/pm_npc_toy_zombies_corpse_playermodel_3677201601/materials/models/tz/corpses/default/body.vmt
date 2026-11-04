@@ -1,0 +1,36 @@
+"VertexlitGeneric"
+{
+//Base Parameter
+	"$basetexture" "models/tz/corpses/default/body"
+	"$bumpmap" "models/tz/corpses/default/body_n"
+	//"$color2" "[.9 .9 .9]"
+
+//Phong Parameter
+	"$Phong"	 "1"
+	"$phongexponent" "5"
+	"$PhongBoost" ".1"
+
+	"$PhongFresnelRanges" "[1 1 1]" //Controlls the optional Fresnel term
+
+	"$phongexponenttexture" "models/tz/corpses/default/body_s" //Specular debe ser negativo al de Blender
+
+	"$phongexponentfactor" "0.25"
+
+	"$PhongAlbedoTint" "1"
+	"$PhongTint" "[.8 .15 .15]"
+	"$phongalbedoboost" "3"
+	"$NormalmapAlphaPhongMask"  "1"
+
+//Rimlight Parameter
+	"$Rimlight" "1"
+	"$RimMask" "1"
+	"$RimlightExponent" "2"
+	"$RimlightBoost" "1.0"
+
+//Other
+	"$Model" "1"
+	"$HalfLambert" "1"
+	"$AmbientOcclusion" "1"
+	"$NoCull" "0" //Disables backface culling
+	"$SurfaceProp" "flesh"
+}
